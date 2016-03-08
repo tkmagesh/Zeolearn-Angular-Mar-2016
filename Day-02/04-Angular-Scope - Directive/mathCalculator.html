@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Math Calculator</title>
+	<script src="angular.js"></script>
+	<script>
+	function MathCalculator(){
+		this.number1 = 0;
+		this.number2 = 0;
+		this.result = 0;
+	}
+	MathCalculator.prototype.add = function(){
+		this.result = this.number1 + this.number2;
+	};
+	MathCalculator.prototype.subtract = function(){
+		this.result = this.number1 - this.number2;
+	};
+	MathCalculator.prototype.multiply = function(){
+		this.result = this.number1 * this.number2;
+	};
+	MathCalculator.prototype.divide = function(){
+		this.result = this.number1 / this.number2;
+	};
+
+	angular
+		.module("ng")
+		.run(function($rootScope){
+			$rootScope.calculator = new MathCalculator();
+		});
+	</script>
+</head>
+<body ng-app>
+	<h1>Math Calculator</h1>
+	<hr>
+	<input type="number" ng-model="calculator.number1">
+	<input type="number" ng-model="calculator.number2">
+	<input type="button" value="Add" ng-click="calculator.add()">
+	<input type="button" value="Subtract" ng-click="calculator.subtract()">
+	<input type="button" value="Multiply" ng-click="calculator.multiply()">
+	<input type="button" value="Divide" ng-click="calculator.divide()">
+	<div ng-bind="calculator.result"></div>
+</body>
+</html>
