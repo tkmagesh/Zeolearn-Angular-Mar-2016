@@ -35,17 +35,42 @@
 	</style>
 	<script type="text/javascript">
 		/*Use Cases*/
+		/*
+		1. List the bugs
+		2. Add a new bug
+		3. Toggle the closed status of a bug
+		4. Remove closed bugs
+		5. Display stats
+		6. Search for the bugs
+		7. Sort the bugs
+		8. Improvise the bug dislay
+		9. Persist the bugs in the storage
+		10. Display 'createdAt'
+		11. Persist the bugs in the server
+		12. Categorize the bugs
 
+		*/
+	</script>
+	<script src="angular.js"></script>
+	<script>
+		var bugTrackerApp = angular.module("bugTrackerApp", []);
+		bugTrackerApp.controller("bugsController", function($scope){
+			$scope.bugs = [
+				"Server communication failure",
+				"Data validation is wrong",
+				"User authentication is erratic"
+			];
+		})
 	</script>
 </head>
-<body>
+<body ng-app="bugTrackerApp">
 	<h1>Bug Tracker</h1>
 	<hr>
-	<section class="content">
+	<section class="content" ng-controller="bugsController">
 		<section class="stats">
 			<span class="closed">2</span>
 			<span> / </span>
-			<span>5</span>
+			<span ng-bind="bugs.length"></span>
 		</section>
 		<section class="search">
 			<label for="">Search :</label>
