@@ -36,8 +36,8 @@
 	<script type="text/javascript">
 		/*Use Cases*/
 		/*
-		1. List the bugs
-		2. Add a new bug
+		1. List the bugs - done
+		2. Add a new bug - done
 		3. Toggle the closed status of a bug
 		4. Remove closed bugs
 		5. Display stats
@@ -60,6 +60,11 @@
 				"Data validation is wrong",
 				"User authentication is erratic"
 			];
+
+			
+			$scope.addNew = function(value){
+				$scope.bugs.push(value);
+			};
 		})
 	</script>
 </head>
@@ -70,7 +75,7 @@
 		<section class="stats">
 			<span class="closed">2</span>
 			<span> / </span>
-			<span ng-bind="bugs.length"></span>
+			<span>{{bugs.length}}</span>
 		</section>
 		<section class="search">
 			<label for="">Search :</label>
@@ -87,12 +92,11 @@
 		</section>
 		<section class="list">
 			<label for="">Bug :</label>
-			<input type="text" name="" id="">
-			<input type="button" value="Add Bug">
+			<input type="text" ng-model="newBugName">
+			<input type="button" value="Add Bug" ng-click="addNew(newBugName)">
 			<input type="button" value="Remove Closed">
 			<ol>
-				<li class="closed"><span class="bug">Server communication failure</span></li>
-				<li><span class="bug">Data validations are wrong</span></li>
+				<li ng-repeat="bug in bugs"><span class="bug">{{bug}}</span></li>
 			</ol>
 		</section>
 	</section>
