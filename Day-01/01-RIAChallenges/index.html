@@ -21,22 +21,70 @@
 		Object.prototype.toInt = function(){
 			return parseInt(this,10);
 		};
+		//State and Behavior
+		//Model
+		function SalaryCalculator(){
+			//this.basic = 0;
 
+			var _basic = 0;
+			this.onBasicChange = null;
+			this.getBasic = function(){
+				return _basic;
+			};
+			this.setBasic = function(value){
+				if (value === _basic) return;
+				_basic = value;
+				//trigger change notification for 'basic'
+				if (typeof this.onBasicChange === 'function')
+					this.onBasicChange();
+			}
+			this.hra = 0;
+			this.da =  0;
+			this.tax =  0;
+			this.salary = 0;
+
+			this.onSalaryChange = null;
+		}
+		SalaryCalculator.prototype.calculate = function(){
+			var subtotal = this.getBasic() + this.hra + this.da;
+			var net = subtotal * ((100-this.tax)/100);
+			this.salary = net;
+			if (typeof this.onSalaryChange === 'function')
+				this.onSalaryChange();
+		}
+
+		//View
 		$(document).ready(function(){
-			$("#btnCalculate").click(function(){
-				var basic = $("#txtBasic").val().toInt(),
-					hra = $("#txtHra").val().toInt(),
-					da = $("#txtDa").val().toInt(),
-					tax = $("#rangeTax").val().toInt();
+			window.calculator = new SalaryCalculator();
 
-				var subtotal = basic + hra + da;
-				var net = subtotal * ((100-tax)/100);
-				$("#divResult").html(net);
+			$("#txtBasic").change(function(){
+				calculator.setBasic($("#txtBasic").val().toInt());
+			});
+			$("#txtHra").change(function(){
+				calculator.hra = $("#txtHra").val().toInt();
+			});
+			$("#txtDa").change(function(){
+				calculator.da = $("#txtDa").val().toInt();
+			});
+			$("#rangeTax").change(function(){
+				calculator.tax = $("#rangeTax").val().toInt();
+			});
+
+			$("#btnCalculate").click(function(){
+				calculator.calculate();
 			});
 
 			$("#rangeTax").change(function(){
 				$("#spanTax").html(this.value);
 			});
+
+			calculator.onBasicChange = function(){
+				$("#txtBasic").val(calculator.getBasic());
+			};
+			calculator.onSalaryChange = function(){
+				$("#divResult").html(calculator.salary);
+			};
+
 		});
 
 	</script>
