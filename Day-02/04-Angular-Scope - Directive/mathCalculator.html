@@ -24,21 +24,23 @@
 	};
 
 	angular
-		.module("ng")
-		.run(function($rootScope){
-			$rootScope.calculator = new MathCalculator();
-		});
+		.module("myApp", [])
+		.controller("mathController", function($scope){
+			$scope.calculator = new MathCalculator();
+		})
 	</script>
 </head>
-<body ng-app>
+<body ng-app="myApp">
 	<h1>Math Calculator</h1>
 	<hr>
-	<input type="number" ng-model="calculator.number1">
-	<input type="number" ng-model="calculator.number2">
-	<input type="button" value="Add" ng-click="calculator.add()">
-	<input type="button" value="Subtract" ng-click="calculator.subtract()">
-	<input type="button" value="Multiply" ng-click="calculator.multiply()">
-	<input type="button" value="Divide" ng-click="calculator.divide()">
-	<div ng-bind="calculator.result"></div>
+	<div ng-controller="mathController">
+		<input type="number" ng-model="calculator.number1">
+		<input type="number" ng-model="calculator.number2">
+		<input type="button" value="Add" ng-click="calculator.add()">
+		<input type="button" value="Subtract" ng-click="calculator.subtract()">
+		<input type="button" value="Multiply" ng-click="calculator.multiply()">
+		<input type="button" value="Divide" ng-click="calculator.divide()">
+		<div ng-bind="calculator.result"></div>
+	</div>
 </body>
 </html>

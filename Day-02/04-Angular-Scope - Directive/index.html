@@ -87,7 +87,7 @@
 			<input type="button" value="Reset" ng-click="calculator.reset()">
 		</div>
 		<div class="field">
-			<div id="divResult" ng-bind="calculator.salary">[Salary]</div>
+			<div id="divResult" ng-bind="calculator.salary | currency">[Salary]</div>
 		</div>
 	</div>
 </body>

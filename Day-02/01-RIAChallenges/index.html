@@ -36,26 +36,33 @@
 				return _data[attrName];
 			};
 
+			this.getAttributes = function(){
+				return JSON.parse(JSON.stringify(_data));
+			};
+
 			this.set = function(attrName, value){
 				if (_data[attrName] === value) return;
 				_data[attrName] = value;
 				//trigger change notification for attrName
-				var eventHandlerFn = _eventHandlers[attrName];
-				if (typeof eventHandlerFn === 'function')
-					eventHandlerFn();
+				var eventHandlerFns = _eventHandlers[attrName];
+				eventHandlerFns.forEach(function(eventHandlerFn){
+					if (typeof eventHandlerFn === 'function')
+						eventHandlerFn();	
+				});
+				
 			};
 
 			var _eventHandlers = {
-				basic : null,
-				hra : null,
-				da : null,
-				tax : null,
-				salary : null
+				basic : [],
+				hra : [],
+				da : [],
+				tax : [],
+				salary : []
 			};
 
 
 			this.onChange = function(attrName, eventHandlerFn){
-				_eventHandlers[attrName] = eventHandlerFn;
+				_eventHandlers[attrName].push(eventHandlerFn);
 			};
 
 		}

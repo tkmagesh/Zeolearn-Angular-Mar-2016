@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Bug Tracker</title>
+	<style>
+		.closed{
+			color : red;
+			text-decoration: line-through;
+			font-style: italic;
+			font-weight: bold;
+		}
+
+		.stats{
+			font-size: 18pt;
+		}
+		ol{
+			width: 400px;
+			list-style: none;
+		}
+		li{
+			margin-bottom: 10px;
+			padding : 5px;
+			border : 1px solid gray;
+			background-color: #e7e7e7;
+			border-radius: 5px;
+		}
+		section{
+			margin-bottom: 10px;
+		}
+		.bug{
+			font-size: 18pt;
+			cursor: pointer;
+		}
+	</style>
+	<script type="text/javascript">
+		/*Use Cases*/
+
+	</script>
+</head>
+<body>
+	<h1>Bug Tracker</h1>
+	<hr>
+	<section class="content">
+		<section class="stats">
+			<span class="closed">2</span>
+			<span> / </span>
+			<span>5</span>
+		</section>
+		<section class="search">
+			<label for="">Search :</label>
+			<input type="text" name="" id="">
+			<label for="">Is Closed ?:</label>
+			<input type="checkbox" name="" id="">
+			<input type="button" value="Show All">
+		</section>
+		<section class="sort">
+			<label for="">Order By:</label>
+			<input type="text" name="" id="">
+			<label for="">Descending ?:</label>
+			<input type="checkbox" name="" id="">
+		</section>
+		<section class="list">
+			<label for="">Bug :</label>
+			<input type="text" name="" id="">
+			<input type="button" value="Add Bug">
+			<input type="button" value="Remove Closed">
+			<ol>
+				<li class="closed"><span class="bug">Server communication failure</span></li>
+				<li><span class="bug">Data validations are wrong</span></li>
+			</ol>
+		</section>
+	</section>
+</body>
+</html>
