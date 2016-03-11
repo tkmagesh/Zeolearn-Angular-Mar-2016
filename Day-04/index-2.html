@@ -40,7 +40,7 @@
 		2. Add a new bug - done
 		3. Toggle the closed status of a bug - done
 		4. Remove closed bugs - done
-		5. Display stats - done
+		5. Display stats
 		6. Search for the bugs
 		7. Sort the bugs
 		8. Improvise the bug dislay
@@ -65,7 +65,7 @@
 
 		bugTrackerApp.value('defaultBugName', '[Default Bug Name]');
 
-		bugTrackerApp.factory('Bug', function(defaultBugName){
+		/*bugTrackerApp.factory('Bug', function(defaultBugName){
 			function Bug(defaults){
 				this.name = defaults.name || defaultBugName;
 				this.isClosed = defaults.isClosed || false;
@@ -74,29 +74,36 @@
 				this.isClosed = !this.isClosed;
 			}
 			return Bug;
+		});*/
+
+		bugTrackerApp.factory("bugOperations", function(){
+			return {
+				toggle : function(){
+					this.isClosed = !this.isClosed
+				}
+			};
 		});
 
-		
 
-
-		bugTrackerApp.controller("bugsController", function($scope, Bug){
+		bugTrackerApp.controller("bugsController", function($scope, bugOperations){
 			$scope.bugs = [
-				new Bug({name : "Server communication failure", isClosed : false}),
-				new Bug({name : "Data validation is wrong", isClosed : true}),
-				new Bug({name : "User authentication is erratic", isClosed : false})
+				{name : "Server communication failure", isClosed : false},
+				{name : "Data validation is wrong", isClosed : true},
+				{name : "User authentication is erratic", isClosed : false}
 			];
 
 			
 			$scope.addNew = function(value){
-				var newBug = new Bug({
+				var newBug = {
 					name : value,
 					isClosed : false
-				});
+				};
 				$scope.bugs.push(newBug);
 			};
 
 			$scope.toggleBug = function(bug){
-				bug.toggle();
+				//bug.toggle();
+				bugOperations.toggle.call(bug);
 			};
 
 			$scope.removeClosed = function(){
@@ -143,7 +150,7 @@
 			<input type="button" value="Add Bug" ng-click="addNew(newBugName)">
 			<input type="button" value="Remove Closed" ng-click="removeClosed()">
 			<ol>
-				<li ng-repeat="bug in (bugs | filter:'data')">
+				<li ng-repeat="bug in bugs">
 					<span class="bug" ng-click="toggleBug(bug)" ng-class="{closed : bug.isClosed}">{{bug.name}}</span>
 				</li>
 			</ol>
