@@ -44,7 +44,7 @@
 		6. Search for the bugs - done
 		7. Sort the bugs - done
 		8. Improvise the bug dislay - done
-		9. Persist the bugs in the localStorage
+		9. Persist the bugs in the localStorage - done
 			window.localStorage
 				- key/value store
 				- value must be string
@@ -158,7 +158,9 @@
 					}
 			};
 
-		})
+		});
+
+
 		//Controller - User Interaction Logic
 		bugTrackerApp.controller("bugsController", function($scope, bugsCollection){
 			$scope.bugs = bugsCollection;
