@@ -62,7 +62,7 @@
 					- clear()
 					- length
 
-		10. Display 'createdAt'
+		10. Display 'createdAt' - done
 		11. Persist the bugs in the server
 		12. Categorize the bugs
 
@@ -181,9 +181,11 @@
 			};
 		});
 
-		bugTrackerApp.filter('elapsed', function(){
+		bugTrackerApp.value("momentApi", moment);
+
+		bugTrackerApp.filter('elapsed', function(momentApi){
 			return function(data){
-				return moment(data).fromNow();
+				return momentApi(data).fromNow();
 			};
 		});
 	</script>
