@@ -91,11 +91,11 @@
 			};
 		});
 
-		bugTrackerApp.factory("bugStorage", function(Bug){
+		bugTrackerApp.factory("bugStorage", function(Bug, $window){
 			//All storage related goes here
 
 			var maxBugId = 0;
-			var storage = window.localStorage;
+			var storage = $window.localStorage;
 			function getAllBugs(){
 				var bugs = [];
 				for(var i=0; i < storage.length; i++){
@@ -136,29 +136,32 @@
 
 		});
 
-		//Controller - User Interaction Logic
-		bugTrackerApp.controller("bugsController", function($scope, bugStorage){
-			$scope.bugs = bugStorage.getAll();
-			
-			
-			$scope.addNew = function(value){
+		bugTrackerApp.service("bugsCollection", function(bugStorage){
+			console.dir(this);
+			var self = this;
+			self.list = bugStorage.getAll();
+			self.addNew = function(value){
 				var newBug = bugStorage.addNew(value);
-				$scope.bugs.push(newBug);
+				self.list.push(newBug);
 			};
 
-			$scope.toggleBug = function(bug){
+			self.toggleBug = function(bug){
 				bug.toggle();
 				bugStorage.save(bug);
 			};
 
-			$scope.removeClosed = function(){
-				for(var i=$scope.bugs.length-1; i>=0; i--)
-					if ($scope.bugs[i].isClosed){
-						bugStorage.remove($scope.bugs[i]);
-						$scope.bugs.splice(i,1);
+			self.removeClosed = function(){
+				for(var i=self.list.length-1; i>=0; i--)
+					if (self.list[i].isClosed){
+						bugStorage.remove(self.list[i]);
+						self.list.splice(i,1);
 					}
 			};
-			
+
+		})
+		//Controller - User Interaction Logic
+		bugTrackerApp.controller("bugsController", function($scope, bugsCollection){
+			$scope.bugs = bugsCollection;
 		});
 
 		bugTrackerApp.filter('closedCount', function($filter){
@@ -175,9 +178,9 @@
 	<hr>
 	<section class="content" ng-controller="bugsController">
 		<section class="stats">
-			<span class="closed">{{ bugs | closedCount }}</span>
+			<span class="closed">{{ bugs.list | closedCount }}</span>
 			<span> / </span>
-			<span>{{bugs.length}}</span>
+			<span>{{bugs.list.length}}</span>
 		</section>
 		<section class="search">
 			<label for="">Search :</label>
@@ -195,11 +198,11 @@
 		<section class="list">
 			<label for="">Bug :</label>
 			<input type="text" ng-model="newBugName">
-			<input type="button" value="Add Bug" ng-click="addNew(newBugName)">
-			<input type="button" value="Remove Closed" ng-click="removeClosed()">
+			<input type="button" value="Add Bug" ng-click="bugs.addNew(newBugName)">
+			<input type="button" value="Remove Closed" ng-click="bugs.removeClosed()">
 			<ol>
-				<li ng-repeat="bug in (bugs | filter:searchBug | orderBy:sortBugBy:sortBugOrder)">
-					<span class="bug" ng-click="toggleBug(bug)" ng-class="{closed : bug.isClosed}">
+				<li ng-repeat="bug in (bugs.list | filter:searchBug | orderBy:sortBugBy:sortBugOrder)">
+					<span class="bug" ng-click="bugs.toggleBug(bug)" ng-class="{closed : bug.isClosed}">
 						{{bug.name | trimText}}
 					</span>
 				</li>
