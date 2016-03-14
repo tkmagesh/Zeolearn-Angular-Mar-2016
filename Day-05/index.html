@@ -91,7 +91,11 @@
 			};
 		});
 
+		bugTrackerApp.factory("bugStorage", function(){
+			//All storage related goes here
+		});
 
+		//Controller - User Interaction Logic
 		bugTrackerApp.controller("bugsController", function($scope, Bug){
 			$scope.bugs = [];
 			var maxBugId = 0;
@@ -129,7 +133,6 @@
 						$scope.bugs.splice(i,1);
 					}
 			};
-
 			
 		})
 		bugTrackerApp.filter('closedCount', function($filter){
