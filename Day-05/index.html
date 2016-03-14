@@ -32,6 +32,10 @@
 			font-size: 18pt;
 			cursor: pointer;
 		}
+		.datetime{
+			font-size: small;
+			font-style: italic;
+		}
 	</style>
 	<script type="text/javascript">
 		/*Use Cases*/
@@ -65,6 +69,8 @@
 		*/
 	</script>
 	<script src="angular.js"></script>
+	<script src="moment.js"></script>
+
 	<script>
 		var bugTrackerApp = angular.module("bugTrackerApp", []);
 
@@ -75,6 +81,7 @@
 				this.id = defaults.id || 0;
 				this.name = defaults.name || defaultBugName;
 				this.isClosed = defaults.isClosed || false;
+				this.createdAt = defaults.createdAt || new Date();
 			}
 			Bug.prototype.toggle = function(){
 				this.isClosed = !this.isClosed;
@@ -172,7 +179,13 @@
 					return bug.isClosed ? ++result : result;
 				},0);
 			};
-		})
+		});
+
+		bugTrackerApp.filter('elapsed', function(){
+			return function(data){
+				return moment(data).fromNow();
+			};
+		});
 	</script>
 </head>
 <body ng-app="bugTrackerApp">
@@ -207,6 +220,7 @@
 					<span class="bug" ng-click="bugs.toggleBug(bug)" ng-class="{closed : bug.isClosed}">
 						{{bug.name | trimText}}
 					</span>
+					<div class="datetime">{{bug.createdAt | elapsed }}</div>
 				</li>
 			</ol>
 		</section>
