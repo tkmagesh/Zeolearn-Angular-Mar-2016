@@ -99,8 +99,21 @@
 		});
 
 		//Controller - User Interaction Logic
-		bugTrackerApp.controller("bugsController", function($scope){
+		bugTrackerApp.controller("bugsController", function($scope, $http, Bug){
 			$scope.bugs = [];
+			var promise = $http.get("http://localhost:3000/bugs");
+			promise.then(function(response){
+				$scope.bugs = response.data;
+			});
+
+			$scope.addNew = function(newBugName){
+				var bug = new Bug({name : newBugName});
+				var promise = $http.post("http://localhost:3000/bugs", bug);
+				promise.then(function(response){
+					$scope.bugs.push(response.data);
+				});	
+			};
+			
 		});
 
 		bugTrackerApp.filter('closedCount', function($filter){
@@ -147,11 +160,11 @@
 		<section class="list">
 			<label for="">Bug :</label>
 			<input type="text" ng-model="newBugName">
-			<input type="button" value="Add Bug" ng-click="bugs.addNew(newBugName)">
-			<input type="button" value="Remove Closed" ng-click="bugs.removeClosed()">
+			<input type="button" value="Add Bug" ng-click="addNew(newBugName)">
+			<input type="button" value="Remove Closed" ng-click="removeClosed()">
 			<ol>
 				<li ng-repeat="bug in (bugs | filter:searchBug | orderBy:sortBugBy:sortBugOrder)">
-					<span class="bug" ng-click="bugs.toggleBug(bug)" ng-class="{closed : bug.isClosed}">
+					<span class="bug" ng-click="toggleBug(bug)" ng-class="{closed : bug.isClosed}">
 						{{bug.name | trimText}}
 					</span>
 					<div class="datetime">{{bug.createdAt | elapsed }}</div>
