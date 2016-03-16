@@ -29,6 +29,12 @@
       "name": "$http is not very dependable",
       "isClosed": false,
       "createdAt": "2016-02-03T06:51:10.288Z"
+    },
+    {
+      "id": 9,
+      "name": "Loading data is not displayed",
+      "isClosed": false,
+      "createdAt": "2016-03-16T18:13:06.814Z"
     }
   ]
 }

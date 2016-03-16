@@ -74,6 +74,25 @@
 	<script>
 		var bugTrackerApp = angular.module("bugTrackerApp", []);
 
+		bugTrackerApp.config(function($httpProvider){
+			$httpProvider.interceptors.push(function($q, $rootScope) {
+			  return {
+			   'request': function(config) {
+			   		console.log('request - ', config);
+			   		$rootScope.showBusy = true;
+			       return config;
+			    },
+
+			    'response': function(response) {
+			    	console.log('response - ', response);
+			       // same as above
+			       $rootScope.showBusy = false;
+			       return response;
+			    }
+			  };
+			});
+		})
+
 		bugTrackerApp.value('defaultBugName', '[Default Bug Name]');
 
 		bugTrackerApp.factory('Bug', function(defaultBugName){
@@ -98,15 +117,45 @@
 			};
 		});
 
-		//Controller - User Interaction Logic
-		bugTrackerApp.controller("bugsController", function($scope, $http, Bug){
-			$scope.bugs = [];
-			var promise = $http.get("http://localhost:3000/bugs");
-			promise.then(function(response){
-				$scope.bugs = response.data.map(function(bugData){
-					return new Bug(bugData);
+		bugTrackerApp.service("bugService", function($http, Bug, $q){
+			this.getAll = function(){
+				/*var deferred = $q.defer();
+				var promise = $http.get("http://localhost:3000/bugs");
+				promise.then(function(response){
+					var result = response.data.map(function(bugData){
+						return new Bug(bugData);
+					});
+					deferred.resolve(result);
 				});
+				return deferred.promise;*/
+
+				/*var promise = $http.get("http://localhost:3000/bugs");
+				var myPromise = promise.then(function(response){
+					var result = response.data.map(function(bugData){
+						return new Bug(bugData);
+					});
+					return result;
+				});
+				return myPromise;*/
+
+				return $http
+					.get("http://localhost:3000/bugs")
+					.then(function(response){
+						return response.data.map(function(bugData){
+							return new Bug(bugData);
+						});
+					});
+			}
+		})
+
+		//Controller - User Interaction Logic
+		bugTrackerApp.controller("bugsController", function($scope, $http, Bug, bugService){
+			$scope.bugs = [];
+			
+			bugService.getAll().then(function(bugs){
+				$scope.bugs = bugs;
 			});
+
 
 			$scope.addNew = function(newBugName){
 				var bug = new Bug({name : newBugName});
@@ -153,7 +202,7 @@
 </head>
 <body ng-app="bugTrackerApp">
 	<h1>Bug Tracker</h1>
-	<h3>[Server]</h3>
+	<h3 ng-show="showBusy">Loading data...!!</h3>
 	<hr>
 	<section class="content" ng-controller="bugsController">
 		<section class="stats">
