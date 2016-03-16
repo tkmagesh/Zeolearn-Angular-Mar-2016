@@ -103,15 +103,32 @@
 			$scope.bugs = [];
 			var promise = $http.get("http://localhost:3000/bugs");
 			promise.then(function(response){
-				$scope.bugs = response.data;
+				$scope.bugs = response.data.map(function(bugData){
+					return new Bug(bugData);
+				});
 			});
 
 			$scope.addNew = function(newBugName){
 				var bug = new Bug({name : newBugName});
 				var promise = $http.post("http://localhost:3000/bugs", bug);
 				promise.then(function(response){
-					$scope.bugs.push(response.data);
+					$scope.bugs.push(new Bug(response.data));
 				});	
+			};
+
+			$scope.toggleBug = function(bug){
+				bug.toggle();
+				$http.put("http://localhost:3000/bugs/" + bug.id, bug)
+			};
+
+			$scope.removeClosed = function(){
+				for(var i= $scope.bugs.length-1; i>=0; i--){
+					var bug = $scope.bugs[i];
+					if (bug.isClosed){
+						$http.delete("http://localhost:3000/bugs/" + bug.id);
+						$scope.bugs.splice(i,1);
+					}
+				}
 			};
 			
 		});

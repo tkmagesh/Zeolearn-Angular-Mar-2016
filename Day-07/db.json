@@ -1,12 +1,6 @@
 {
   "bugs": [
     {
-      "id": 1,
-      "name": "Data validation error",
-      "isClosed": false,
-      "createdAt": "2016-02-03T04:05:19.327Z"
-    },
-    {
       "id": 2,
       "name": "Server communication failure",
       "isClosed": false,
@@ -35,12 +29,6 @@
       "name": "$http is not very dependable",
       "isClosed": false,
       "createdAt": "2016-02-03T06:51:10.288Z"
-    },
-    {
-      "id": 9,
-      "name": "Promises are not very promising",
-      "isClosed": false,
-      "createdAt": "2016-03-16T17:03:16.085Z"
     }
   ]
 }
