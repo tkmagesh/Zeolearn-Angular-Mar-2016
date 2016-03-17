@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Providers - Demo</title>
+	<script src="angular.js"></script>
+	<script>
+		var myApp = angular.module("myApp", []);
+
+		myApp.config(function(testProvider, myAppFactoryProvider, myAppServiceProvider, myAppValueProvider){
+			console.log('app in config phase');
+			console.log('testProvider -> ', testProvider);
+			console.log('setting the innerfactory object name to "someObject"')
+			testProvider.setInnerFactoryObjectName('someObject');
+			console.log('myAppFactoryProvider -> ', myAppFactoryProvider);
+			console.log('myAppServiceProvider -> ', myAppServiceProvider);
+			console.log('myAppValueProvider -> ', myAppValueProvider);
+		});
+		
+		myApp.run(function(test, myAppFactory){
+			console.log('app in init phase');
+			console.log('test  -> ', test);
+			console.log('myAppFactory -> ', myAppFactory);
+		});
+		
+		myApp.provider("test", function(){/* Outer factory - accessible during the config phase */
+			var innerFactoryObjectName = 'innerFactory';
+			return {
+				name : 'outerFactory',
+				setInnerFactoryObjectName : function(value){
+					innerFactoryObjectName = value;
+				},
+				$get : function(){ /* Inner factory - accessible during the init phase */
+					return {
+						name : innerFactoryObjectName
+					}
+				}
+			};
+		});
+
+		myApp.factory("myAppFactory", function(){
+			this.name = 'Magesh';
+			/*return {
+				name : 'Rasika'
+			};*/
+		});
+
+		myApp.service("myAppService", function(){
+			
+		});
+
+		myApp.value('myAppValue', 10);
+
+	</script>
+</head>
+<body ng-app="myApp">
+	
+</body>
+</html>
