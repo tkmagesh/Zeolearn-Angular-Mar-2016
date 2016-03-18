@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Angular Routing - Demo</title>
+	<script src="angular.js"></script>
+	<script src="angular-route.js"></script>
+	<script>
+		var routingApp = angular.module("routingApp", ["ngRoute"]);
+
+		routingApp.config(function($routeProvider){
+			$routeProvider
+				.when("/products", {
+					/*template : '<h3>Products</h3>'*/
+					templateUrl : 'templates/productsTemplate.html'
+				})
+				.when("/customers", {
+					/*template : '<h3>Customers</h3>'*/
+					templateUrl : 'templates/customersTemplate.html'
+				})
+				.otherwise({
+					redirectTo : '/products'
+				});
+		});
+
+		routingApp.service("productsService", function($http){
+			this.getAll = function(){
+				return $http
+					.get("http://localhost:3000/products")
+					.then(function(response){
+						return response.data;
+					});
+			}
+		});
+
+		routingApp.controller("productsController", function(productsService){
+			$scope.products = [];
+			productsService.getAll().then(function(products){
+				$scope.products = products;
+			});
+		})
+	</script>
+</head>
+<body ng-app="routingApp">
+	<h1>My App</h1>
+	<div>
+		<span><a href="#/products">Products</a></span> 
+		<span><a href="#/customers">Customers</a></span>
+	</div>
+	<hr>
+	<div ng-view>
+		
+	</div>
+</body>
+</html>

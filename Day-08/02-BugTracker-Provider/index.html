@@ -68,7 +68,7 @@
 
 		*/
 	</script>
-	<script src="angular.js"></script>
+	<script src="angular.min.js"></script>
 	<script src="moment.js"></script>
 
 	<script>
@@ -76,7 +76,7 @@
 
 		bugTrackerApp.value('defaultBugName', '[Default Bug Name]');
 
-		bugTrackerApp.factory('Bug', function(defaultBugName){
+		bugTrackerApp.factory('Bug', ['defaultBugName', function(defaultBugName){
 			function Bug(defaults){
 				this.id = defaults.id || 0;
 				this.name = defaults.name || defaultBugName;
@@ -87,7 +87,7 @@
 				this.isClosed = !this.isClosed;
 			}
 			return Bug;
-		});
+		}]);
 
 		bugTrackerApp.value('defaultTrimLength', 20);
 
@@ -98,8 +98,9 @@
 			};
 		});
 
-		bugTrackerApp.provider("bugStorage", function(){
-			var _storageOption = 'localStorage';
+		bugTrackerApp.constant('defaultStorageOption', 'localStorage')
+		bugTrackerApp.provider("bugStorage", function(defaultStorageOption){
+			var _storageOption = defaultStorageOption;
 			return {
 				setStorageOption : function(option){
 					_storageOption = option;
@@ -153,7 +154,7 @@
 		bugTrackerApp.config(function(bugStorageProvider){
 			bugStorageProvider.setStorageOption('sessionStorage');
 		});
-		
+
 		bugTrackerApp.service("bugsCollection", function(bugStorage){
 			console.dir(this);
 			var self = this;
@@ -181,6 +182,7 @@
 
 		//Controller - User Interaction Logic
 		bugTrackerApp.controller("bugsController", function($scope, bugsCollection){
+			console.log($scope);
 			$scope.bugs = bugsCollection;
 		});
 

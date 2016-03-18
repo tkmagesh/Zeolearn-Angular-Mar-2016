@@ -1,0 +1,39 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Pen",
+      "cost": 5,
+      "units": 20,
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque sit eveniet accusantium dolorem fuga cumque incidunt quos dignissimos nobis. Voluptatibus eius, est inventore. Unde mollitia, cumque doloribus pariatur maiores voluptate?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex sed facere qui a mollitia temporibus minus nostrum accusantium blanditiis totam adipisci maiores beatae, maxime ad. Facere quod inventore temporibus, distinctio?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima laboriosam laborum esse numquam ipsam, natus possimus facere exercitationem debitis expedita, excepturi accusantium illum nobis qui quod! Totam error odio, autem?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo officiis, accusamus eius eligendi nemo, dolore quod! Officiis, ratione eveniet porro numquam facere assumenda hic laudantium, labore totam sint earum libero.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea architecto voluptatem quo dolorem ratione sunt, modi ex sapiente temporibus distinctio, quae consequatur, qui quaerat autem, quia nihil! Amet, perferendis, nesciunt."
+    },
+    {
+      "id": 2,
+      "name": "Hen",
+      "cost": 100,
+      "units": 10,
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque sit eveniet accusantium dolorem fuga cumque incidunt quos dignissimos nobis. Voluptatibus eius, est inventore. Unde mollitia, cumque doloribus pariatur maiores voluptate?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex sed facere qui a mollitia temporibus minus nostrum accusantium blanditiis totam adipisci maiores beatae, maxime ad. Facere quod inventore temporibus, distinctio?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima laboriosam laborum esse numquam ipsam, natus possimus facere exercitationem debitis expedita, excepturi accusantium illum nobis qui quod! Totam error odio, autem?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo officiis, accusamus eius eligendi nemo, dolore quod! Officiis, ratione eveniet porro numquam facere assumenda hic laudantium, labore totam sint earum libero.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea architecto voluptatem quo dolorem ratione sunt, modi ex sapiente temporibus distinctio, quae consequatur, qui quaerat autem, quia nihil! Amet, perferendis, nesciunt."
+    },
+    {
+      "id": 3,
+      "name": "Ten",
+      "cost": 10,
+      "units": 10,
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque sit eveniet accusantium dolorem fuga cumque incidunt quos dignissimos nobis. Voluptatibus eius, est inventore. Unde mollitia, cumque doloribus pariatur maiores voluptate?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex sed facere qui a mollitia temporibus minus nostrum accusantium blanditiis totam adipisci maiores beatae, maxime ad. Facere quod inventore temporibus, distinctio?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima laboriosam laborum esse numquam ipsam, natus possimus facere exercitationem debitis expedita, excepturi accusantium illum nobis qui quod! Totam error odio, autem?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo officiis, accusamus eius eligendi nemo, dolore quod! Officiis, ratione eveniet porro numquam facere assumenda hic laudantium, labore totam sint earum libero.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea architecto voluptatem quo dolorem ratione sunt, modi ex sapiente temporibus distinctio, quae consequatur, qui quaerat autem, quia nihil! Amet, perferendis, nesciunt."
+    },
+    {
+      "id": 4,
+      "name": "Den",
+      "cost": 500,
+      "units": 3,
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque sit eveniet accusantium dolorem fuga cumque incidunt quos dignissimos nobis. Voluptatibus eius, est inventore. Unde mollitia, cumque doloribus pariatur maiores voluptate?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex sed facere qui a mollitia temporibus minus nostrum accusantium blanditiis totam adipisci maiores beatae, maxime ad. Facere quod inventore temporibus, distinctio?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima laboriosam laborum esse numquam ipsam, natus possimus facere exercitationem debitis expedita, excepturi accusantium illum nobis qui quod! Totam error odio, autem?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo officiis, accusamus eius eligendi nemo, dolore quod! Officiis, ratione eveniet porro numquam facere assumenda hic laudantium, labore totam sint earum libero.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea architecto voluptatem quo dolorem ratione sunt, modi ex sapiente temporibus distinctio, quae consequatur, qui quaerat autem, quia nihil! Amet, perferendis, nesciunt."
+    },
+    {
+      "id": 5,
+      "name": "Zen",
+      "cost": 10000,
+      "units": 1,
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque sit eveniet accusantium dolorem fuga cumque incidunt quos dignissimos nobis. Voluptatibus eius, est inventore. Unde mollitia, cumque doloribus pariatur maiores voluptate?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex sed facere qui a mollitia temporibus minus nostrum accusantium blanditiis totam adipisci maiores beatae, maxime ad. Facere quod inventore temporibus, distinctio?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima laboriosam laborum esse numquam ipsam, natus possimus facere exercitationem debitis expedita, excepturi accusantium illum nobis qui quod! Totam error odio, autem?Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo officiis, accusamus eius eligendi nemo, dolore quod! Officiis, ratione eveniet porro numquam facere assumenda hic laudantium, labore totam sint earum libero.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea architecto voluptatem quo dolorem ratione sunt, modi ex sapiente temporibus distinctio, quae consequatur, qui quaerat autem, quia nihil! Amet, perferendis, nesciunt."
+    }
+  ]
+}
