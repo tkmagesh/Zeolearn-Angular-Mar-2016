@@ -1,0 +1,15 @@
+<style>
+	.cost{
+		color : red;
+		font-size: 15pt;
+		font-style: italic;
+	}
+	.units{
+		font-style: italic;
+		font-weight: bold;
+	}
+</style>
+<h3>{{product.name}}</h3>
+<div class="cost">{{product.cost | currency}}</div>
+<p>{{product.desc}}</p>
+<p>Hurry up!! Only <span class="units">{{product.units}}</span> units are left!</p>

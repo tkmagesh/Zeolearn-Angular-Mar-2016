@@ -15,6 +15,10 @@
 					templateUrl : 'templates/productsTemplate.html',
 					controller : 'productsController'
 				})
+				.when("/products/:id", {
+					templateUrl : 'templates/productInfoTemplate.html',
+					controller : 'productInfoController'
+				})
 				.when("/customers", {
 					/*template : '<h3>Customers</h3>'*/
 					templateUrl : 'templates/customersTemplate.html'
@@ -30,12 +34,27 @@
 						return response.data;
 					});
 			};
+			this.getById = function(id){
+				return $http
+					.get("http://localhost:3000/products/" + id)
+					.then(function(response){
+						return response.data;
+					});
+
+			}
 		});
 
 		routingApp.controller("productsController", function(productsService, $scope){
 			$scope.products = [];
 			productsService.getAll().then(function(products){
 				$scope.products = products;
+			});
+		});
+
+		routingApp.controller("productInfoController", function($scope, productsService, $routeParams){
+			var productId = $routeParams.id;
+			productsService.getById(productId).then(function(product){
+				$scope.product = product;
 			});
 		});
 	</script>
