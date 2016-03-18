@@ -3,61 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Angular Routing - Demo</title>
-	<script src="angular.js"></script>
-	<script src="angular-route.js"></script>
-	<script>
-		var routingApp = angular.module("routingApp", ["ngRoute"]);
-
-		routingApp.config(function($routeProvider){
-			$routeProvider
-				.when("/products", {
-					/*template : '<h3>Products</h3>'*/
-					templateUrl : 'templates/productsTemplate.html',
-					controller : 'productsController'
-				})
-				.when("/products/:id", {
-					templateUrl : 'templates/productInfoTemplate.html',
-					controller : 'productInfoController'
-				})
-				.when("/customers", {
-					/*template : '<h3>Customers</h3>'*/
-					templateUrl : 'templates/customersTemplate.html'
-				})
-				.otherwise({
-					redirectTo : '/products'
-				});
-		});
-		routingApp.service("productsService", function($http){
-			this.getAll = function(){
-				return $http.get("http://localhost:3000/products")
-					.then(function(response){
-						return response.data;
-					});
-			};
-			this.getById = function(id){
-				return $http
-					.get("http://localhost:3000/products/" + id)
-					.then(function(response){
-						return response.data;
-					});
-
-			}
-		});
-
-		routingApp.controller("productsController", function(productsService, $scope){
-			$scope.products = [];
-			productsService.getAll().then(function(products){
-				$scope.products = products;
-			});
-		});
-
-		routingApp.controller("productInfoController", function($scope, productsService, $routeParams){
-			var productId = $routeParams.id;
-			productsService.getById(productId).then(function(product){
-				$scope.product = product;
-			});
-		});
-	</script>
+	<script src="lib/angular.js"></script>
+	<script src="lib/angular-route.js"></script>
+	<script src="app.js"></script>
+	<script src="products/products.js"></script>
+	<script src="products/productsService.js"></script>
+	<script src="products/productsController.js"></script>
+	<script src="products/productInfoController.js"></script>
+	<script src="customers/customers.js"></script>
 </head>
 <body ng-app="routingApp">
 	<h1>My App</h1>
