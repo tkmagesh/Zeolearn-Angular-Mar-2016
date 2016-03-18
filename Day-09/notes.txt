@@ -1,0 +1,31 @@
+Node.js - runtime for js
+
+npm - node package manager
+
+package.json
+	- manifest file for js applications
+	- metadata info
+	- app name, desc, ver, author, repository, keywords, license, script, dependencies(dev, runtime)
+	
+jasmine
+	- testing framework (bdd)
+	- apis to organize the test code (describe, it)
+	- assertion (expect)
+	- matcher (toBe, not.toBe, toBeDefined, toBeUndefined), extensible
+	- spy
+
+karma
+	- test runner framework
+
+bower
+	- client side dependency management (angular, angular-route, bootstrap, html5boilerplate, jquery)
+
+protractor
+	- an extension to selenium webdriver
+	- used for end-to-end testing
+
+angular-seed
+https://github.com/angular/angular-seed
+
+
+
