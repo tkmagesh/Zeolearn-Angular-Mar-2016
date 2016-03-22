@@ -15,3 +15,9 @@ greetModule.controller("greetController", function($scope){
 		$scope.greetMessage = 'Hi ' + $scope.username + ', Have a nice day!';
 	};
 });
+
+greetModule.filter("trimText", function(){
+	return function(data){
+		return data.length < 30 ? data : data.substr(0,30) + '...';
+	};
+});

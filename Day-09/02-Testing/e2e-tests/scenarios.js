@@ -39,4 +39,28 @@ describe('my app', function() {
     });
 
   });
+
+  describe('greet', function() {
+
+    beforeEach(function() {
+      browser.get('index.html#/greet');
+    });
+
+
+    it('should display the message when greeted', function() {
+        //Arrange
+          var txtUserName = element(by.model("username"));
+          var btnGreet = element(by.buttonText("Greet"));
+          var divMessage = element(by.binding("greetMessage"));
+          var expectedMessage = 'Hi Magesh, Have a nice day!';
+        //Act
+          txtUserName.sendKeys("Magesh");
+          btnGreet.click();
+          var message = divMessage.getText();
+
+        //Assert
+        expect(message).toBe(expectedMessage);
+    });
+
+  });
 });

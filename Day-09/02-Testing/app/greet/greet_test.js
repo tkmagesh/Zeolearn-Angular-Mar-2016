@@ -11,10 +11,8 @@ describe("greetModule", function(){
 
 			//Assert
 			expect(dummyScope.username).toBeDefined();
-		}))
-	})
+		}));
 
-	describe("greetController", function(){
 		it("should initialize greetMessage as empty string", inject(function($controller){
 			//Arrange
 			var dummyScope = {};
@@ -24,10 +22,8 @@ describe("greetModule", function(){
 
 			//Assert
 			expect(dummyScope.greetMessage).toBe('');
-		}))
-	});
+		}));
 
-	describe("greetController", function(){
 		it("should populate greetMessage when greeted", inject(function($controller){
 			//Arrange
 			var dummyScope = {};
@@ -43,4 +39,34 @@ describe("greetModule", function(){
 			expect(dummyScope.greetMessage).toBe(expectedResult);
 		}));
 	})
+
+	describe("trimTextFilter", function(){
+		it("should return the original string for short strings", inject(function($filter){
+			//Arrange
+			var input = 'short string',
+				expectedOutput = 'short string',
+				trimText = $filter('trimText');
+
+			//Act
+			var actualOutput = trimText(input);
+
+			//Assert
+			expect(actualOutput).toBe(expectedOutput);
+		}));
+
+		it("should return the truncated string for long strings", inject(function($filter){
+			//Arrange
+			var input = 'This is a long string for testing the filter',
+				expectedOutput = 'This is a long string for test...',
+				trimText = $filter('trimText');
+
+			//Act
+			var actualOutput = trimText(input);
+
+			//Assert
+			expect(actualOutput).toBe(expectedOutput);
+		}));
+	});
+
+	
 });
